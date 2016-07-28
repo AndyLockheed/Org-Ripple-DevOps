@@ -121,7 +121,7 @@ grunt serve --tenant=ripple
 ```
 
 #### IDE Configuration
-NOTE: this needs more detail
+NOTE: this needs more detail  
 If the application is to be ran from an IDE the following steps should be taken:
 
 * Import the project by targeting the root POM.xml file  
