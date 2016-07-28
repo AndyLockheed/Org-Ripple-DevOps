@@ -1,0 +1,1 @@
+puppet apply --modulepath %SystemDrive%\vagrant\modules %SystemDrive%\vagrant\manifests\default.pp

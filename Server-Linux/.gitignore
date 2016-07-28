@@ -1,0 +1,5 @@
+files/id_rsa
+**/.vagrant/**/*
+**/modules/**/*
+**/drop/**/*
+!/drop/.gitkeep

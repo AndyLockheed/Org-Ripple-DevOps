@@ -1,0 +1,47 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "AndyLM/RippleOSIWin10"
+  config.vm.boot_timeout = 180
+    
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant.
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "RippleOSI"
+    vb.gui = true
+    vb.memory = 6144
+    vb.cpus = 2
+  end
+  
+  # Set the machine host name
+  config.vm.hostname = "rippleosi-dev"
+  
+  # Set the communication method between host and VM
+  config.vm.communicator = "winrm"
+  
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine.
+  config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+  config.vm.guest = :windows
+  
+  config.windows.set_work_network = true
+  
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  config.vm.synced_folder ".", "/vagrant"
+  config.vm.synced_folder "~/", "/hostUser"
+      
+  # Provision with shell script
+  config.vm.provision "shell", path: "tools/bootstrap.bat"
+end
